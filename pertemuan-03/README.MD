@@ -9,4 +9,5 @@ Hari ini, Rabu 08 0ktober 2025, saya belajar:
 <il>memmbuat struktur from untuk section contact</li>
 <li>membuat styling untuk selector ID #about</li>
 <li>membuat styling untuk selector ID #about elemen h2</li>
+<li>membuat syling untuk selector ID #about elemen p</li>
 </ol>
