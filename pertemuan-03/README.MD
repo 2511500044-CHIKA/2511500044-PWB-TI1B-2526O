@@ -8,4 +8,5 @@ Hari ini, Rabu 08 0ktober 2025, saya belajar:
 <il>mengugunakan file emmet.html pertemuan-02 untuk file index.html pertemuan-03</li>
 <il>memmbuat struktur from untuk section contact</li>
 <li>membuat styling untuk selector ID #about</li>
+<li>membuat styling untuk selector ID #about elemen h2</li>
 </ol>
