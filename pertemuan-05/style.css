@@ -204,6 +204,15 @@ body {
             text-align: center;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+        }        
+        
         header li a:hover {
         background-color: #85020d;
         border-radius: 6px;
