@@ -141,10 +141,7 @@ body {
        @media (max-width: 600px) {
         .menu-toggle {
             display: block;
-            position: absolute;
-            Left: 16px;
-            top: 8px;
-               }
+        }
 
         nav {
             display: none;
@@ -157,7 +154,7 @@ body {
         nav.active {
             display: flex;
         }
-        
+
         header {
             background-color: #003366;
             color: #fff;
@@ -231,6 +228,13 @@ body {
             font-size: 28px;
             cursor: pointer;
         }        
+
+        .menu-toggle {
+            display: block;
+            position: absolute;
+            Left: 16px;
+            top: 8px;
+               }
         
         header li a:hover {
         background-color: #85020d;
