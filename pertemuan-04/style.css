@@ -135,6 +135,18 @@ body {
             padding: 15px;
             text-align: center;
         }
+        header ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+        header li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 12px;
+        }
 
         nav ul {
             list-style: none;
