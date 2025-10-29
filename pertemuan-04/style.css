@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+#home p {
+text-align: justify;
+}
 
 body {
     margin: 0;
@@ -9,7 +12,9 @@ body {
     color: #333;
     line-height: 1.5;
 }
-        #about {
+        #about,
+        #about,
+        #contact {
             background-color: #fcaffc;
             border-radius: 10px;
             padding: 20px;
@@ -18,13 +23,16 @@ body {
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        #about h2 {
+        #about h2,
+        #about h2,
+        #contact h2 {
             color: #003366;
             border-bottom: 2px solid #003366;
             padding-bottom: 6px;
             margin-top: 0;
             margin-bottom: 16px;
         }
+        
 
         #about p {
             display: flex;
@@ -55,6 +63,7 @@ body {
                 margin-bottom: 2px;
             }
         }
+
         #contact {
             background-color: #f8a4ed;
             border-radius: 10px;
