@@ -145,7 +145,15 @@ body {
             Left: 16px;
             top: 8px;
                }
-               
+
+        nav {
+            display: none;
+            flex-direction: column;
+            background: #aaa;
+            width: 100%;
+            padding: 5px 0;
+        }
+        
         header {
             background-color: #003366;
             color: #fff;
