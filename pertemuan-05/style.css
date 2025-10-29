@@ -139,6 +139,13 @@ body {
             background-color: #9932cc;
         }
        @media (max-width: 600px) {
+        .menu-toggle {
+            display: block;
+            position: absolute;
+            Left: 16px;
+            top: 8px;
+               }
+               
         header {
             background-color: #003366;
             color: #fff;
