@@ -153,6 +153,10 @@ body {
             width: 100%;
             padding: 5px 0;
         }
+
+        nav.active {
+            display: flex;
+        }
         
         header {
             background-color: #003366;
