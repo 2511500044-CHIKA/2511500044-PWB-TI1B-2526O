@@ -1,5 +1,9 @@
 <?php
-echo $_GET{"txtNama"};
+  session_start();
+ $sesname  = $_SESSION["name"];
+ $sesemail = $_SESSION["email"];
+ $sespesan = $_SESSION["pesan"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,10 +85,14 @@ echo $_GET{"txtNama"};
           <small id="charCount">0/200 karakter</small>
         </label>
 
-
         <button type="submit">Kirim</button>
         <button type="reset">Batal</button>
       </form>
+      </p>Terima kasih sudah menghubungi kami:
+        <label>Name : <strong><?php echo $sesname; ?> </strong></label>
+        <label>Email : <strong><?php echo $sesemail; ?> </strong></label>
+        <label>Pesan : <strong><?php echo $sespesan; ?> </strong></label>
+     </p>
     </section>
   </main>
 
