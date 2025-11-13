@@ -52,6 +52,7 @@ endif;
       <p>Ini contoh paragraf HTML.</p>
     </section>
 
+<<<<<<< HEAD
     <section id="Data mahasiswa">
       <h2>Entry Data Mahasiswa</h2>
       <form action="proses_entry.php" method="POST">
@@ -137,6 +138,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $Nama_Abang = "Abi Salam Isnandri";
     $Nama_Adek = "Kinan Arsyifa Salsabilla Dan Airin Nursofia Salsabilla"
     ?>
+=======
+    <section id="about">
+      <?php
+      $nim = 2511500010;
+      $NIM = '0344300002';
+      $nama = "Say'yid Abdullah";
+      $Nama = 'Al\'kautar Benyamin';
+      $tempat = "Jebus";
+      ?>
+>>>>>>> 18c7378cdcd6c3a337bb854dfd4a92d484f83ab7
       <h2>Tentang Saya</h2>
       <p><strong>NIM:</strong>
         <?php
@@ -145,6 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </p>
       <p><strong>Nama Lengkap:</strong>
         <?php
+<<<<<<< HEAD
         echo $Nama_lengkap;
         ?> &#128526;
       </p>
@@ -156,6 +168,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <p><strong>Nama Orang Tua:</strong> <?php echo $Nama_Orang_Tua;?></p>
       <p><strong>Nama Abang:</strong> <?php echo $Nama_Abang?></p>
       <p><steong>Nama Adek:</strong> <php echo $Nama_Adek;?></p>
+=======
+        echo $Nama;
+        ?> &#128526;
+      </p>
+      <p><strong>Tempat Lahir:</strong> <?php echo $tempat; ?></p>
+      <p><strong>Tanggal Lahir:</strong> 1 Januari 2000</p>
+      <p><strong>Hobi:</strong> Memasak, coding, dan bermain musik &#127926;</p>
+      <p><strong>Pasangan:</strong> Belum ada &hearts;</p>
+      <p><strong>Pekerjaan:</strong> Dosen di ISB Atma Luhur &copy; 2025</p>
+      <p><strong>Nama Orang Tua:</strong> Bapak Setiawan dan Ibu Maria</p>
+      <p><strong>Nama Kakak:</strong> Antonius Setiawan</p>
+      <p><strong>Nama Adik:</strong> <?php echo $sespesan ?></p>
+>>>>>>> 18c7378cdcd6c3a337bb854dfd4a92d484f83ab7
     </section>
 
     <section id="contact">
@@ -198,4 +223,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </footer>
 
   <script src="script.js"></script>
+<<<<<<< HEAD
 </body>
+=======
+</body>
+
+</html>
+>>>>>>> 18c7378cdcd6c3a337bb854dfd4a92d484f83ab7
