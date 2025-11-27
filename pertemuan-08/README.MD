@@ -12,4 +12,3 @@ Hari ini, Kamis 13 Nov 2025, saya mengerjakan UTS:<br>
 <li>menambahkan section id data mahasiswa</li>
 <li>menambahkan session start<li>
 </ol>
-sss
