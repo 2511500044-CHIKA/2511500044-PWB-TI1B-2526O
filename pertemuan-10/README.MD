@@ -9,4 +9,5 @@ Hari ini Kamis 04 Des 2025, saya mempelajari teori<br>
    <li>menambahkan kode baru di file koneksi.php</li>
    <li>membuat database dengan nama db_pwd2025</li>
    <li>menambahkan kode di SQL</li>
+   <li>menambah file baru read.php dipertemuan 10</li>
 
