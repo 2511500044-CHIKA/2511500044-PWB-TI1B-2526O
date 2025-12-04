@@ -6,3 +6,6 @@ NIM: 2511500044<br>
 Hari ini Kamis 04 Des 2025, saya mempelajari teori<br>
 <ol>
    <li>menambahkan file baru koneksi.php di pertemuan 10</li>
+   <li>menambahkan kode baru di file koneksi.php</li>
+   <li>membuat database dengan nama db_pwd2025</li>
+   
