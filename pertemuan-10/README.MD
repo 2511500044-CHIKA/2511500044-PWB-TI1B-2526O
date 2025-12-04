@@ -10,4 +10,6 @@ Hari ini Kamis 04 Des 2025, saya mempelajari teori<br>
    <li>membuat database dengan nama db_pwd2025</li>
    <li>menambahkan kode di SQL</li>
    <li>menambah file baru read.php dipertemuan 10</li>
+   <li>menambahkan kode baru diread.php</li>
+   <li>menulis data atau record untuk table tbl_tamu</li>
 
