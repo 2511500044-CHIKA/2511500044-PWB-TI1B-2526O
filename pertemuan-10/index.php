@@ -1,25 +1,6 @@
 <?php
 session_start();
-
 require_once __DIR__ . '/fungsi.php';
-
-
-$sesnama = "";
-if (isset($_SESSION["sesnama"])):
-  $sesnama = $_SESSION["sesnama"];
-endif;
-
-$sesemail = "";
-if (isset($_SESSION["sesemail"])):
-  $sesemail = $_SESSION["sesemail"];
-endif;
-
-$sespesan = "";
-if (isset($_SESSION["sespesan"])):
-  $sespesan = $_SESSION["sespesan"];
-endif;
-
-
 ?>
 
 <!DOCTYPE html>
@@ -59,8 +40,8 @@ endif;
 
     <section id="biodata">
       <h2>Biodata Sederhana Mahasiswa</h2>
-
       <form action="proses.php" method="POST">
+
         <label for="txtNim"><span>NIM:</span>
           <input type="text" id="txtNim" name="txtNim" placeholder="Masukkan NIM" required>
         </label>
@@ -104,8 +85,8 @@ endif;
         <button type="submit">Kirim</button>
         <button type="reset">Batal</button>
       </form>
-
     </section>
+
     <?php
     $biodata = $_SESSION["biodata"] ?? [];
 
@@ -115,13 +96,14 @@ endif;
       "tempat" => ["label" => "Tempat Lahir:", "suffix" => ""],
       "tanggal" => ["label" => "Tanggal Lahir:", "suffix" => ""],
       "hobi" => ["label" => "Hobi:", "suffix" => " &#127926;"],
-      "pasangan" => ["label" => "Pasangan:", "suffix" => " &#hearts;"],
+      "pasangan" => ["label" => "Pasangan:", "suffix" => " &hearts;"],
       "pekerjaan" => ["label" => "Pekerjaan:", "suffix" => " &copy; 2025"],
       "ortu" => ["label" => "Nama Orang Tua:", "suffix" => ""],
       "kakak" => ["label" => "Nama Kakak:", "suffix" => ""],
       "adik" => ["label" => "Nama Adik:", "suffix" => ""],
     ];
     ?>
+
     <section id="about">
       <h2>Tentang Saya</h2>
       <?= tampilkanBiodata($fieldConfig, $biodata) ?>
@@ -148,21 +130,20 @@ endif;
         <button type="reset">Batal</button>
       </form>
 
-      <?php 
-      $kontak = $_SESSION["Kontak"] ?? [];
-      $fieldConfig = [
-        "nama" => ["label" => "Nama :", "suffix" => ""],
-        "email" => ["label" => "Email :", "suffix" => ""],
-        "pesan" => ["label" => "Pesan :", "suffix" => ""],
+      <?php
+      $contact = $_SESSION["contact"] ?? [];
+
+      $fieldContact = [
+        "nama" => ["label" => "Nama:", "suffix" => ""],
+        "email" => ["label" => "Email:", "suffix" => ""],
+        "pesan" => ["label" => "Pesan Anda:", "suffix" => ""]
       ];
-       ?>
-        <br>
-        <hr>
-        <h2>Yang menghubungi kami</h2>
-        <?= tampilkanBiodata($fieldConfig, $kontak) ?>
+      ?>
 
-    </section>        
-
+      <br>
+      <hr>
+      <h2>Yang menghubungi kami</h2>
+      <?= tampilkanBiodata($fieldContact, $contact) ?>
     </section>
   </main>
 
