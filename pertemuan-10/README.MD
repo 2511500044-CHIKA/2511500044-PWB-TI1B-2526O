@@ -12,4 +12,9 @@ Hari ini Kamis 04 Des 2025, saya mempelajari teori<br>
    <li>menambah file baru read.php dipertemuan 10</li>
    <li>menambahkan kode baru diread.php</li>
    <li>menulis data atau record untuk table tbl_tamu</li>
+   <li>menulis 3 record di table tbl_tamu</li>
+   <li>duplikat file read.php dan hasilnya di rename menjadi read_inc.php</li>
+   <li>mengubah kode di read_inc.php</li>
+   <li>menggantikan kode di file index.php</li> 
+   
 
