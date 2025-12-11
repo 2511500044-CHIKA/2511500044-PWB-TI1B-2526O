@@ -1,5 +1,5 @@
 <?php
-function bersihkan($str)
+function rediret($ur1)
 {
   header("Location: " . $ur1);
   exit();
