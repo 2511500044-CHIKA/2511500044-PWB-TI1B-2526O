@@ -3,16 +3,17 @@ session_start();
 require_once __DIR__ . '/koneksi.php';
 require_once __DIR__ . '/fungsi.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $_SESSION['flash_error'] = 'Akses tidak valid.';
-    redirect_ke('index.php#contact');
-}
 $arrContact = [
   "nama" => $_POST["txtNama"] ?? "",
   "email" => $_POST["txtEmail"] ?? "",
   "pesan" => $_POST["txtPesan"] ?? ""
 ];
 $_SESSION["contact"] = $arrContact;
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $_SESSION['flash_error'] = 'Akses tidak valid.';
+    redirect_ke('index.php#contact');
+}
 
 $nama = bersihkan($_POST['txtNama'] ?? '');
 $email = bersihkan($_POST['txtEmail'] ?? '');
@@ -27,7 +28,7 @@ if ($nama ===  '') {
 
 if ($email === '') {
     $errors[] = 'Email wajib diisi.';
-    
+
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = 'Format email tidak valid.';
 }
@@ -53,7 +54,7 @@ if (!empty($errors)) {
 }
  #menyiapkan query INSERT dengan prepared statement
 $sql = "INSERT INTO tbl_tamu (cnama, cemail, cpesan) VALUES (?, ?, ?)";
-$stmt = mysqli_prepare($stmt, "sss", $nama, $email, $pesan);
+$stmt = mysqli_prepare($conn, $sql);
 
 if (!$stmt) {
     #jika gagal prepare, kirim pesan eror ke pengguna (tanpa detail sensitif)

@@ -4,7 +4,10 @@ function redirect_ke($ur1)
   header("Location: " . $ur1);
   exit();
 }
-
+function bersihkan($str)
+{
+  return htmlspecialchars(trim($str));
+}
 function tidakKosong($str)
 {
   return strlen(trim($str)) > 0;
