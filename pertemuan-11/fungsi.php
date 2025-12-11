@@ -1,5 +1,5 @@
 <?php
-function rediret($ur1)
+function redirect_ke($ur1)
 {
   header("Location: " . $ur1);
   exit();
