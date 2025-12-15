@@ -159,6 +159,11 @@ $_SESSION['captcha_answer'] = $a + $b;
           <small id="charCount">0/200 karakter</small>
         </label>
 
+        <label for="txtCaptcha">
+          <span>Captcha ( <?= $a ?> + <?= $b ?> = ?):</span>
+          <input type="text" id="txtCaptcha" name="txtCaptcha" placeholder="jawabannya?" required>
+        </label>
+
         <button type="submit">Kirim</button>
         <button type="reset">Batal</button>
       </form>
