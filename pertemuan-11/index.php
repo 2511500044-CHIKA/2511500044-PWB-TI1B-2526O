@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once __DIR__ . '/fungsi.php';
+$a = rand(1, 9);
+$b = rand(1, 9);
+
+// simpan jawabanya di session
+$_SESSION['captcha_answer'] = $a + $b;
+
 ?>
 
 <!DOCTYPE html>
@@ -122,13 +128,13 @@ require_once __DIR__ . '/fungsi.php';
       <h2>Kontak Kami</h2>
 
       <?php if (!empty ($flash_sukses)) : ?>
-        <div style="padding:10px; margin-bottom:10px; background:#d4edda; color:#155724; border-radius:6px;">
+        <div style="padding:10px; margin-bottom:10px; background: #d4edda; color: #155724; border-radius:6px;">
             <?= $flash_sukses; ?>
         </div>
     <?php endif; ?>
 
     <?php if (!empty($flash_error)): ?>
-        <div style="padding:10px; margin-bottom:10px; background:#f8d7da; color:#721c24; border-radius:6px;">
+        <div style="padding:10px; margin-bottom:10px; background: #f8d7da; color: #721c24; border-radius:6px;">
             <?= $flash_error; ?>
         </div>
     <?php endif; ?>
