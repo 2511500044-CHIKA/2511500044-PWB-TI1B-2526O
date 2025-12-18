@@ -10,19 +10,28 @@ if (!$q) {
  }
 ?>
 
->?php
-    echo"<p>Gagal membaca data tamu: " . htmlspecialchars(mysqli_error($conn)) . "</p>";
-}   elseif(mysqli_num_rows($q) === 0) {
-    echo"<p>Belum ada data yang tersimpan.</p>";
-    echo"<p>Data tamu masih kosong.</p>";
-}   else {
+<?php
+    $flash_sukses = $_SESSION['flash_sukses'] ?? ''; #jika query sukses
+    $flash_eror  = $_SESSION['flash_error'] ?? ''; #jika query eror
+    #bersihkan session ini 
+    unset($_SESSION['flash_sukses'], $_SESSION['flash_error']);
+?>
+
+<?php if (!empty($flash_sukses)): ?>
+    <div style="padding:10px; margin-bottom: 10px;
+    background:#d4edda; color:#721c24; border-radius:6px; 
+    <?= $flash_sukses; ?>
+    </div>
+<?php endif; ?>
+
+<?php if (!empty($flash_eror)): ?>
+    <div style="padding:10px; margin-bottom: 10px;
+    baground:#f8d7da; color:#721c24; border-radius:6px; 
+    <?= $flash_eror; ?>
+    </div>
+   
 <table border="1" cellpadding="8" cellspacing="0">
     <tr>
-        <th>ID</th>
-        <th>Nama</th>
-        <th>Email</th>
-        <th>Pes
-    </tr>
     <th>No</th>
     <th>Aksi</th>
     <th>ID</th>
@@ -31,6 +40,7 @@ if (!$q) {
     <th>Pesan</th>
     <th>Created At</th>
 </th>
+
 <?php $i = 1; ?>
     <?php while ($row = mysqli_fetch_assoc($q)): ?>
         <tr>
@@ -38,5 +48,9 @@ if (!$q) {
            <td><a href="edit.php?cid=<?= (int)$row['cid']; ?>">Edit</a><  
            <td><?= $row['cid']; ?></td>
            <td><?= htmlspecialchars($row['cnama']); ?></td>
-           <?php endwhile; ?>
+           <td><?= htmlspecialchars($row['cemail']); ?></td>
+            <td><?= htmlspecialchars($row['cpesan']); ?></td>
+            <td><?= formatTanggal(htmlspecialchars($row['created_at'])); ?></td>
+    </tr>
+  <?php endwhile; ?>
 </table>
