@@ -1,5 +1,7 @@
 <?php
+session_start();
 require 'koneksi.php';
+require 'fungsi.php';
 
 $fieldconfig = [
     "nama"  => ["label" => "Nama:","suffix" => ""],
