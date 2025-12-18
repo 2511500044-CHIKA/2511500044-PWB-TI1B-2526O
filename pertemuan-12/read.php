@@ -19,16 +19,17 @@ if (!$q) {
 
 <?php if (!empty($flash_sukses)): ?>
     <div style="padding:10px; margin-bottom: 10px;
-    background:#d4edda; color:#721c24; border-radius:6px; 
+    background:#d4edda; color:#721c24; border-radius:6px"; 
     <?= $flash_sukses; ?>
     </div>
 <?php endif; ?>
 
 <?php if (!empty($flash_eror)): ?>
     <div style="padding:10px; margin-bottom: 10px;
-    baground:#f8d7da; color:#721c24; border-radius:6px; 
+    background:#f8d7da; color:#721c24; border-radius:6px";
     <?= $flash_eror; ?>
     </div>
+<?php endif; ?>
    
 <table border="1" cellpadding="8" cellspacing="0">
     <tr>
@@ -45,11 +46,12 @@ if (!$q) {
     <?php while ($row = mysqli_fetch_assoc($q)): ?>
         <tr>
            <td><?= $i++; ?></td>
-           <td><a href="edit.php?cid=<?= (int)$row['cid']; ?>">Edit</a><  
+           <td><a href="edit.php?cid=<?= (int)$row['cid']; ?>">Edit</a></td>
            <td><?= $row['cid']; ?></td>
            <td><?= htmlspecialchars($row['cnama']); ?></td>
            <td><?= htmlspecialchars($row['cemail']); ?></td>
            <td><?= htmlspecialchars($row['cpesan']); ?></td>
+             <td><?= nl2br(htmlspecialchars($row['cpesan'])); ?></td>
            <td><?= formatTanggal(htmlspecialchars($row['created_at'])); ?></td>
     </tr>
   <?php endwhile; ?>
