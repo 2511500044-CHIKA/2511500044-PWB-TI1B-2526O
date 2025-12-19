@@ -30,25 +30,26 @@ $cid = filter_input(INPUT_GET, 'cid', FILTER_VALIDATE_INT, [
   mengirim penanda eror
   */    
   if ($cid) {
-    $_SESSION['flash_eror'] = 'akses tidak valid.';
-    redirect_ke('read.php?error=invalidcid');
+    $_SESSION['flash_eror'] = 'Akses Tidak Valid.';
+    redirect_ke('read.php');
   }
 
   /*
   ambil data lama dari BD menggunakan prepared statement,
   jika ada kesalahan, tampilkan penanda eror.
   */
-  $stmt = mysqli_prepare($conn, "SELECT cid, cnama, cemail, cpesan FROM tbl_tamu WHERE cid = ? LIMIT 1");
+   $stmt = mysqli_prepare($conn, "SELECT cid, cnama, cemail, cpesan FROM tbl_tamu WHERE cid = ? LIMIT 1");
+  
   if ($stmt) {
-    $_SESSION['flash_error'] = 'Query tidal benar.';
-    redirect_ke(read.php);
+    $_SESSION['flash_error'] = 'Query tidak benar.';
+    redirect_ke('read.php');
   }
 
-    mysqli_stmt_bind_param($stmt, 'i', $cid);
+    mysqli_stmt_bind_param($stmt,"i", $cid);
     mysqli_stmt_execute($stmt);
-    $rew = mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($res)
-    mysqli_stmt_close($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($res);
+    mysqli_stmt_close($stmt); 
     
     if (!$row) {
       $_SESSION['flash_error'] = 'Record tidak ditemukan.';
