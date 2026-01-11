@@ -2,13 +2,20 @@
 session_start();
 require 'koneksi.php';
 require 'fungsi.php';
+if (!isset($_SESSION['captcha_result']) || !isset($_SESSION['captcha_label'])) {
+    $a = rand(1, 9);
+    $b = rand(1, 9);
+    $_SESSION['captcha_result'] = $a + $b;
+    $_SESSION['captcha_label']  = "$a + $b";
+}
+
 
 /*ambil nilai cid dari GET dan lakukan validasi untuk
 mengecek cid harus angka atau lebih besar fdari 0 (> 0).
 'options' => ['min_range' => 1] artinya harus lebih besar dari 1
 (bukan 0, bahkn bukan negatif, bukan huruf, bukan HTML).
 */
-
+/* validasi cid */
 $cid = filter_input(INPUT_GET, 'cid', FILTER_VALIDATE_INT, [
   ['options' => ['min_range' => 1]]
 ]);
@@ -74,72 +81,73 @@ if (!empty($old)) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Judul Halaman</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judul Halaman</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <h1>Ini Header</h1>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
-      &#9776;
-    </button>
-    <nav>
-      <ul>
-        <li><a href="#home">Beranda</a></li>
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#contact">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <h1>Ini Header</h1>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            &#9776;
+        </button>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <section id="home">
-      <h2>Edit Buku Tamu</h2>
-      <?php if (!empty($flash_error)): ?>
-        <div style="padding:10px; margin-bottom: 10px;
-        background:#f8d7da; color:#721c24; border-radius:6px" ;
-          <?= $flash_error; ?>
-          </div>
-        <?php endif; ?>
-        <form action="proses.php" method="POST">
+    <main>
+        <section id="contact">
+            <h2>Edit Buku Tamu</h2>
 
-          <input type="text" name="cid" value="<?= (int)$cid; ?>">
+            <?php if (!empty($flash_sukses)) : ?>
+                <div style="padding:10px; margin-bottom:10px; 
+                        background: #f8d7da; color: #721c24; border-radius: 6px;">
+                    <?= $flash_error; ?>
+                </div>
+            <?php endif; ?>
+            <form action="proses_update.php" method="POST">
 
-          </label for="txtNama"><span>Nama:</span>
-          <input type="text" id="txtNama" name="txtNamaEd"
-            placeholder="Masukkan Nama" required autocomplete="name"
-            value="<?= !empty($nama) ? $nama : ''; ?>">
-          </label>
+                <input type="hidden" name="cid" value="<?= (int)$cid; ?>">
 
-          </lebel for="txtEmail"><span>Email:</span>
-          <input type="text" id="txtEmail" name="txtEmailEd"
-            placeholder="Masukkan Email" required autocomplete="email"
-            value="<?= !empty($email) ? $email : ''; ?>">
-          </label>
+                <label for="txtNama"><span>Nama:</span>
+                    <input type="text" id="txtNama" name="txtNama"
+                        placeholder="Masukkan nama" required autocomplete="name"
+                       value="<?= htmlspecialchars($nama) ?>">
+                </label>
 
-          </lebel for="txtPesan"><span>Pesan:</span>
-          <input type="text" id="txtPesan" name="txtPesanEd" roes="4"
-            placeholder="Tulis Pesan Anda..." " 
-          required><?= !empty($pesan) ? $pesan : '' ?></texterea> 
-        </label>
+                <label for="txtEmail"><span>Email:</span>
+                    <input type="email" id="txtEmail" name="txtEmail"
+                        placeholder="Masukkan email" required autocomplete="email"
+                        value="<?= htmlspecialchars($email) ?>">
+                </label>
 
-        </label for=" txtCaptcha"><span>Chaptcha 2 x 3 = </span>
-          <input type="text" id="txtChaptcha" name="txtChaptchaEd"
-            placeholder="Jawab Pertanyaan..." required>
-          </label>
+                <label for="txtPesan"><span>Pesan Anda:</span>
+                    <textarea id="txtPesan" name="txtPesan" rows="4"
+                        placeholder="Tulis pesan anda..."
+                        required><?= htmlspecialchars($pesan) ?></textarea>
+                </label>
 
-          <botomn type="submit">Kirim</button>
-            <button type="reset">Batal</button>
-            <a href="read.php" class="reset">kembali</a>
-        </form>
-    </section>
-  </main>
+                <label for="txtCaptcha"><span>captcha 2 x 3 = ?</span>
+                    <input type="number" id="txtCaptcha" name="txtCaptcha"
+                     placeholder="Jawabannya?" required>
+                </label>
+
+                <button type="submit">Kirim</button>
+                <button type="reset">Batal</button>
+                <a href="read.php" class="reset">Kembali</a>
+            </form>
+        </section>
+    </main>
 
   <script src="script.js"></script>
 </body>

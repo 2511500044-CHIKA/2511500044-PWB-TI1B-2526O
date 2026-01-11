@@ -23,9 +23,9 @@
    $nama  = bersihkan($_POST['txtNama'] ?? '');
    $email = bersihkan($_POST['txtEmail'] ?? '');
    $pesan = bersihkan($_POST['txtPesan'] ?? '');
-   $chaptch = bersihkan($_POST) ['txtCaptcha'] ?? '';
+   $chaptch = bersihkan($_POST['txtCaptcha'] ?? '');
 
-   #validasi sederhana
+     #validasi sederhana
    $errors = []; #ini array untuk menampung semua eror yang ada
 
    if ($nama ==='') {
@@ -46,23 +46,20 @@
       $errors[] = 'Pertannyaan  wajib diisi.';
     }
 
-    if (mb_strlen($nama) > 3) {
+    if (mb_strlen($nama) < 3) {
       $errors[] = 'Nama minimal 3 karakter.';
     }
     
-    if (mb_strlen($pesan) > 10) {
+    if (mb_strlen($pesan) < 10) {
       $errors[] = 'Pesan maksimal 10 karakter.';
     }
 
-    if ($chaptch !== "6") {
-      $errors[] = 'Jawaban' .$captcha.'capthca salah.';
-    }
+     if ($captcha!=="6") {
+    $errors[] = 'Jawaban '. $captcha.' captcha salah.';
+  }
 
-    /*
-    kondisi dibawah ini hanya dikerjakan jika ada eror,
-    simpan nilai lama dan pesan eror, lalu redirect (konsep PRG)
-    */
-    if (count($errors)) {
+    /*jika ada error*/
+   if (!empty($errors)) {
       $_SESSION['old'] = [
         'nama'  => $nama,
         'email' => $email,
@@ -71,42 +68,49 @@
 
       $_SESSION['flash_errors'] = $errors;
       redirect_ke('edit.php?cid=' . (int) $cid);
+      exit;
     }
-    /*
-    preparetd statement untuk anti SQL injection,
-    menyiapkan query UPTADE dengan prapered statement
-    (WAJIB WHERE cid = ?)
-    */
-    $stmt = mysqli_prepare($conn, "UPTADE tbl_tamu
-                                    SET cnama = ?, cemail = ?, cppesan = ?,
-                                     WHERE cid = ?");
+    /*siapkan statement*/
+    $stmt = mysqli_prepare($conn, "UPDATE tbl_tamu SET cnama = ?, cemail = ?, cppesan = ?,WHERE cid = ?");
     
     if (!$stmt) {
       #jika gagal prapare, kirim pesan eror (tanpa detail sensitif)      
       $_SESSION['flash_eror']  = 'terjadi kesalahan pada sistem (prapare gagal).';
       redirect_ke('edit.php?cid=' . (int) $cid);
+      exit;
     }
     
     #bind parameter dan eksekusi ( s = string, i = integer)
     mysqli_stmt_bind_param($stmt, 'sssi', $nama, $email, $pesan, $cid);
 
-    if (mysqli_stmt_execute($stmt)) { #jika berhasil, kosongkan old value}
-      unset($_SESSION['old']);
-    /*
-   Redirect balik ke read.php dan tampilkan info sukses.
-   */
+    /*eksekusi*/
+    if (mysqli_stmt_execute($stmt)) { 
+      
+      if (mysqli_stmt_execute($stmt)) { 
+        
+        // HAPUS CAPTCHA SETELAH BERHASIL
+        unset($_SESSION['captcha_result'], $_SESSION['captcha_label']);
+
+        // bersihkan data lama
+        unset($_SESSION['old']);
+
   $_SESSION['flash_sukses'] = 'Terima kasih, data Anda sudah diperbaharui.';
-  redirect_ke('read.php'); ; #pola PRG" kembali kedata dan exit()
+
+  redirect_ke('read.php'); 
+  exit;
+}
   } else { #jika gagal, simpan kembali old value dan tampilkan eror umum
     $_SESSION['old'] = [
       'nama'  => $nama,
       'email' => $email,
-      'pesan' => $pesan
+      'pesan' => $pesan,
     ];
+
       $_SESSION['flash_error'] = 'Data gagal diperbaharui. silahkan coba lagi.';
       redirect_ke('read.php');
+      exit;
     } 
 #tutup statement
 mysqli_stmt_close($stmt);
-
 redirect_ke('edit.php?cid=' . (int) $cid);
+exit;
