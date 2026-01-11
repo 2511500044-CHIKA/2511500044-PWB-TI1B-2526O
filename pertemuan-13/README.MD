@@ -9,4 +9,6 @@ Nim: 2511500044<br>
   <li>mengcopy semua kode di proses_update.php ke proses_delete.php</li>
   <li>merapikan kode yang ada di dalam file proses_delete.php untuk proses hapus</li>
   <li>menambahka parameter cid untuk link delete di read.php</li>
+  <li>memperbaiki file proses_delete.php agar menggunakan parameter cid</li>
+  <li>menambahkan konfirmasi penghapusan di read.php untuk link delete</li>
 <ol>
