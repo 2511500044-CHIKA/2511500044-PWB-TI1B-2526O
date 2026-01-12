@@ -1,6 +1,6 @@
 <?php
    session_start();
-   require __DIR__. '/koneksi.php';  
+   require __DIR__. '/.koneksi.php';  
    require __DIR__. '/fungsi.php';
 
    #cek method from, hanya izin POST
@@ -68,37 +68,29 @@
 
       $_SESSION['flash_errors'] = $errors;
       redirect_ke('edit.php?cid=' . (int) $cid);
-      exit;
     }
     /*siapkan statement*/
-    $stmt = mysqli_prepare($conn, "UPDATE tbl_tamu SET cnama = ?, cemail = ?, cppesan = ?,WHERE cid = ?");
+    $stmt = mysqli_prepare($conn, "UPDATE tbl_tamu 
+                                   SET cnama = ?, cemail = ?, cppesan = ?,
+                                   WHERE cid = ?");
     
     if (!$stmt) {
       #jika gagal prapare, kirim pesan eror (tanpa detail sensitif)      
       $_SESSION['flash_eror']  = 'terjadi kesalahan pada sistem (prapare gagal).';
       redirect_ke('edit.php?cid=' . (int) $cid);
-      exit;
     }
     
     #bind parameter dan eksekusi ( s = string, i = integer)
     mysqli_stmt_bind_param($stmt, 'sssi', $nama, $email, $pesan, $cid);
 
     /*eksekusi*/
-    if (mysqli_stmt_execute($stmt)) { 
-      
-      if (mysqli_stmt_execute($stmt)) { 
-        
-        // HAPUS CAPTCHA SETELAH BERHASIL
-        unset($_SESSION['captcha_result'], $_SESSION['captcha_label']);
-
-        // bersihkan data lama
+    if (mysqli_stmt_execute($stmt)) { #jika berhasil, kosongkan old value
         unset($_SESSION['old']);
-
+        /*
+        Redirect balik ke read.php dan tampilkan info sukses.
+        */
   $_SESSION['flash_sukses'] = 'Terima kasih, data Anda sudah diperbaharui.';
-
   redirect_ke('read.php'); 
-  exit;
-}
   } else { #jika gagal, simpan kembali old value dan tampilkan eror umum
     $_SESSION['old'] = [
       'nama'  => $nama,
@@ -107,10 +99,9 @@
     ];
 
       $_SESSION['flash_error'] = 'Data gagal diperbaharui. silahkan coba lagi.';
-      redirect_ke('read.php');
-      exit;
+      redirect_ke('edit.php');
+    
     } 
 #tutup statement
 mysqli_stmt_close($stmt);
 redirect_ke('edit.php?cid=' . (int) $cid);
-exit;

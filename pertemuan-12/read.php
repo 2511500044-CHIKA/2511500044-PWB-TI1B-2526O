@@ -3,19 +3,18 @@ session_start();
 require 'koneksi.php';
 require 'fungsi.php';
 
-$flash_sukses = $_SESSION['flash_sukses'] ?? ''; // jika query sukses
-$flash_error  = $_SESSION['flash_error'] ?? '';  // jika ada error
-
-// bersihkan session flash
-unset($_SESSION['flash_sukses'], $_SESSION['flash_error']);
-
 $sql = "SELECT * FROM tbl_tamu ORDER BY cid DESC";
-$q = mysqli_query($koneksi, $sql);
-
+$q = mysqli_query($conn, $sql);
 if (!$q) {
     die("Query error: " . mysqli_error($koneksi));
 }
+?>
 
+<?php
+$flash_sukses = $_SESSION['flash_sukses'] ?? ''; #jika query sukses
+$flash_error  = $_SESSION['flash_error'] ?? ''; #jika ada error
+#bersihkan session ini
+unset($_SESSION['flash_sukses'], $_SESSION['flash_error']);
 ?>
 
 <?php if (!empty($flash_sukses)) : ?>

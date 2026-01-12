@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require __DIR__ . './koneksi.php';
+  require __DIR__ . '/koneksi.php';
   require_once __DIR__ . '/fungsi.php';
 
   #cek method form, hanya izinkan POST
@@ -54,11 +54,14 @@
     $errors[] = 'Pesan minimal 10 karakter.';
   }
 
- if ($captcha!=="6") {
+  if ($captcha!=="6") {
     $errors[] = 'Jawaban '. $captcha.' captcha salah.';
   }
 
-  /*jika ada error*/
+  /*
+  kondisi di bawah ini hanya dikerjakan jika ada error, 
+  simpan nilai lama dan pesan error, lalu redirect (konsep PRG)
+  */
   if (!empty($errors)) {
     $_SESSION['old'] = [
       'nama'  => $nama,
