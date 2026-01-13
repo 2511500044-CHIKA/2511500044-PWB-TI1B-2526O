@@ -15,7 +15,7 @@ $cid = filter_input(INPUT_POST, 'cid', FILTER_VALIDATE_INT, [
 ]);
 
 if (!$cid) {
-  $_SESSION['flash_biodata'] = 'CID Tidak Valid.';
+  $_SESSION['flash_eror_biodata'] = 'CID Tidak Valid.';
   redirect_ke('edit.php?cid=' . (int)$cid);
 }
 
@@ -25,10 +25,10 @@ $Nama_lengkap  = bersihkan($_POST['txtNamaLengkapEd']  ?? '');
 $Tempat_lahir = bersihkan($_POST['txtTempatLahirEd'] ?? '');
 $Tanggal_lahir = bersihkan($_POST['txtTanggalLahir'] ?? '');
 $Hobi = bersihkan($_POST['txtHobiEd'] ?? '');
-$pasangan = bersihkan($_POST['txtPasanganEd'] ?? '');
+$pasangan = bersihkan($_POST['txPpasanganEd'] ?? '');
 $Pekerjaan = bersihkan($_POST['txPekerjaanEd'] ?? '');
 $Nama_Orang_Tua = bersihkan($_POST['txtNamaOrangTuaEd'] ?? '');
-$Nama_Adek = bersihkan($_POST['txtNamaAdekEd'] ?? '');
+$Nama_Adek = bersihkan($_POST['txtNamaAdikEd'] ?? '');
 $Nama_Abang = bersihkan($_POST['txtNamaAbangEd'] ?? '');
 
 #Validasi sederhana
@@ -87,7 +87,7 @@ if (!empty($errors)) {
     'Nama_Adik' =>$nama_adik,
   ];
 
-  $_SESSION['flash_biodata'] = implode('<br>', $errors);
+  $_SESSION['flash_eror_biodata'] = implode('<br>', $errors);
   redirect_ke('edit.php?cid=' . (int)$cid);
 }
 
@@ -100,7 +100,7 @@ $stmt = mysqli_prepare($conn, "UPDATE tbl_mahasiswa SET cnim = ?, cnama = ?, cte
                                 WHERE cid = ?");
 if (!$stmt) {
   #jika gagal prepare, kirim pesan error (tanpa detail sensitif)
-  $_SESSION['flash_biodata'] = 'Terjadi kesalahan sistem (prepare gagal).';
+  $_SESSION['flash_eror_biodata'] = 'Terjadi kesalahan sistem (prepare gagal).';
   redirect_ke('edit.php?cid=' . (int)$cid);
 }
 
