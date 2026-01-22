@@ -1,7 +1,7 @@
 <?php
 require 'koneksi.php';
 
-$fieldContact = [
+$fieldConfig = [
   "nim" => ["label" => "Nim:", "suffix" => ""],
   "nama_lengkap" => ["label" => "Nama_Lengkap:", "suffix" => ""],
   "tempat_lahir" => ["label" => "Tempat_Lahir:", "suffix" => ""],
@@ -21,7 +21,7 @@ if (!$q) {
   echo "<p>Belum ada data tamu yang tersimpan.</p>";
 } else {
   while ($row = mysqli_fetch_assoc($q)) {
-    $arrContact = [
+    $biodata = [
       "nim"  => $row["cnim"]  ?? "",
       "nama_lengkap"  => $row["cnama_lengkap"]  ?? "",
       "tempat_lahir" => $row["ctempat_lahir"] ?? "",
@@ -33,7 +33,7 @@ if (!$q) {
       "nama_abang" => $row["cnama_abang"] ?? "",
       "nama_adik" => $row["cnama_adik"] ?? "",
     ];
-    echo tampilkanBiodata($fieldContact, $arrContact);
+    echo tampilkanBiodata($fieldConfig, $biodata);
   }
 }
 ?>

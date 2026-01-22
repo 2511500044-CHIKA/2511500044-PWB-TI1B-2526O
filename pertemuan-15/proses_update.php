@@ -5,7 +5,7 @@ require_once __DIR__ . '/fungsi.php';
 
 #cek method form, hanya izinkan POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  $_SESSION['flash_error'] = 'Akses tidak valid.';
+  $_SESSION['flash_error_biodata'] = 'Akses tidak valid.';
   redirect_ke('read.php');
 }
 
@@ -96,7 +96,8 @@ if (!empty($errors)) {
     menyiapkan query UPDATE dengan prepared statement 
     (WAJIB WHERE cid = ?)
   */
-$stmt = mysqli_prepare($conn, "UPDATE tbl_mahasiswa SET cnim = ?, cnama = ?, ctempat_lahir = ? , ctanggal_lahir = ?, chobi = ?, cpasangan = ?, cpekerjaan = ?, cnama_orang_tua = ?, cnama_abang = ?, cnama_adik = ? 
+$stmt = mysqli_prepare($conn, "UPDATE tbl_mahasiswa 
+                                SET cnim = ?, cnama = ?, ctempat_lahir = ? , ctanggal_lahir = ?, chobi = ?, cpasangan = ?, cpekerjaan = ?, cnama_orang_tua = ?, cnama_abang = ?, cnama_adik = ? 
                                 WHERE cid = ?");
 if (!$stmt) {
   #jika gagal prepare, kirim pesan error (tanpa detail sensitif)
