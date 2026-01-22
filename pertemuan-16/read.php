@@ -33,16 +33,33 @@
 
 <table border="1" cellpadding="8" cellspacing="0">
   <tr>
-    <th>No</th>
-    <th>Aksi</th>
-    <th>ID</th>
-    <th>Nama</th>
-    <th>Email</th>
-    <th>Pesan</th>
+    <th>Kode_Pengunjung</th>
+    <th>Nama_Pengunjung</th>
+    <th>Alamat_Rumah</th>
+    <th>Tanggal_Kunjungan</th>
+    <th>Hobi</th>
+    <th>Asal_SLTA</th>
+    <th>Pekerjaan</th>
+    <th>Nama_Orang_Tua</th>
+    <th>Nama_Pacar</th>
+    <th>Nama_Mantan</th>
     <th>Created At</th>
   </tr>
   <?php $i = 1; ?>
   <?php while ($row = mysqli_fetch_assoc($q)): ?>
+    <?php
+    $cid                          = $row['cid']                        ?? 0;
+    $cidkode_pengunjung           = $row['ckode_pengunjung']           ?? '';
+    $cidnama_pengunjung           = $row['cnama_pengunjung']           ?? '';
+    $cidalamat_rumah              = $row['calamat_rumah']              ?? '';
+    $cidtanggal_kunjungan         = $row['ctanggal_kunjungan']         ?? '';
+    $cidhobi                      = $row['chobi']                      ?? '';
+    $cidasal_slta                 = $row['casal_slta']                 ?? '';
+    $cidpekerjaan                 = $row['cpekerjaan']                 ?? '';
+    $cidnama_orang_tua            = $row['cnama_orang_tua']            ?? '';
+    $cidnama_pacar                = $row['cnama_pacar']                ?? '';
+    $cidnama_mantan               = $row['cnama_mantan']               ?? '';
+    ?>
     <tr>
       <td><?= $i++ ?></td>
       <td>
@@ -50,9 +67,16 @@
         <a onclick="return confirm('Hapus <?= htmlspecialchars($row['cnama']); ?>?')" href="proses_delete.php?cid=<?= (int)$row['cid']; ?>">Delete</a>
       </td>
       <td><?= $row['cid']; ?></td>
-      <td><?= htmlspecialchars($row['cnama']); ?></td>
-      <td><?= htmlspecialchars($row['cemail']); ?></td>
-      <td><?= nl2br(htmlspecialchars($row['cpesan'])); ?></td>
+      <td><?= htmlspecialchars($row['ckode_pengunjung']); ?></td>
+      <td><?= htmlspecialchars($row['cnama_prngunjung']); ?></td>
+      <td><?= nl2br(htmlspecialchars($row['calamat_pengunjung'])); ?></td>
+      <td><?= formatTanggal(htmlspecialchars($row['ctanggal_kunjungan'])); ?></td>
+      <td><?= htmlspecialchars($row['chobi']); ?></td>
+      <td><?= htmlspecialchars($row['casal_slta']); ?></td>
+      <td><?= htmlspecialchars($row['cpekerjaan']); ?></td>
+      <td><?= htmlspecialchars($row['cnama_orang_tua']); ?></td>
+      <td><?= htmlspecialchars($row['cnama_pacar']); ?></td>
+      <td><?= htmlspecialchars($row['cnama_mantan']); ?></td>
       <td><?= formatTanggal(htmlspecialchars($row['dcreated_at'])); ?></td>
     </tr>
   <?php endwhile; ?>
